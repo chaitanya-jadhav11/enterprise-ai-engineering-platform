@@ -1,0 +1,261 @@
+START
+  ↓
+supervisor_node
+  ↓
+----------------------
+|                    |
+|                    |
+jira_agent      github_agent
+|                    |
+response_node
+  ↓
+END
+
+=====================================================
+LangGraph Representation
+
+START
+  ↓
+supervisor_node
+  ↓
+-----------------------------------
+|                                 |
+|                                 |
+jira_requirement_agent      github_repository_agent
+|                                 |
+jira_mcp_client            github_mcp_client
+|                                 |
+planner_node              architecture_node
+|                                 |
+------------response_node----------
+                |
+               END
+ ============================================
+
+enterprise-ai-engineering-platform/
+│
+├── app.py
+├── requirements.txt
+├── .env
+├── README.md
+│
+├── config/
+│   ├── settings.py
+│   ├── logging_config.py
+│   └── constants.py
+│
+├── api/
+│   ├── __init__.py
+│   ├── chat_controller.py
+│   ├── health_controller.py
+│   └── models/
+│       ├── request_models.py
+│       └── response_models.py
+│
+├── graph/
+│   ├── graph_builder.py
+│   ├── conditional_edges.py
+│   ├── state.py
+│   ├── enums.py
+│   └── subgraphs/
+│       ├── requirement_graph.py
+│       ├── repository_graph.py
+│       ├── pr_review_graph.py
+│       └── incident_graph.py
+│
+├── nodes/
+│   ├── supervisor/
+│   │   ├── supervisor_node.py
+│   │   └── router_node.py
+│   │
+│   ├── requirement/
+│   │   ├── requirement_node.py
+│   │   ├── planner_node.py
+│   │   └── implementation_node.py
+│   │
+│   ├── repository/
+│   │   ├── repo_analysis_node.py
+│   │   ├── architecture_node.py
+│   │   └── dependency_node.py
+│   │
+│   ├── pr_review/
+│   │   ├── diff_analysis_node.py
+│   │   ├── code_quality_node.py
+│   │   └── security_review_node.py
+│   │
+│   ├── documentation/
+│   │   ├── readme_node.py
+│   │   └── confluence_node.py
+│   │
+│   ├── testing/
+│   │   ├── unit_test_node.py
+│   │   └── integration_test_node.py
+│   │
+│   ├── incident/
+│   │   ├── log_analysis_node.py
+│   │   ├── metrics_analysis_node.py
+│   │   └── root_cause_node.py
+│   │
+│   └── common/
+│       ├── response_node.py
+│       └── error_node.py
+│
+├── agents/
+│   ├── supervisor_agent.py
+│   ├── requirement_agent.py
+│   ├── repository_agent.py
+│   ├── pr_review_agent.py
+│   ├── documentation_agent.py
+│   ├── testing_agent.py
+│   └── incident_agent.py
+│
+├── prompts/
+│   ├── supervisor/
+│   │   └── supervisor_prompt.py
+│   │
+│   ├── requirement/
+│   │   ├── requirement_prompt.py
+│   │   └── planner_prompt.py
+│   │
+│   ├── repository/
+│   │   └── architecture_prompt.py
+│   │
+│   ├── pr_review/
+│   │   └── review_prompt.py
+│   │
+│   ├── documentation/
+│   │   └── documentation_prompt.py
+│   │
+│   └── incident/
+│       └── incident_prompt.py
+│
+├── tools/
+│   ├── github_tools.py
+│   ├── jira_tools.py
+│   ├── confluence_tools.py
+│   ├── postgres_tools.py
+│   ├── slack_tools.py
+│   └── grafana_tools.py
+│
+├── connectors/
+│   ├── base/
+│   │   └── connector.py
+│   │
+│   ├── github/
+│   │   ├── github_connector.py
+│   │   └── github_models.py
+│   │
+│   ├── jira/
+│   │   ├── jira_connector.py
+│   │   └── jira_models.py
+│   │
+│   ├── confluence/
+│   │   └── confluence_connector.py
+│   │
+│   ├── slack/
+│   │   └── slack_connector.py
+│   │
+│   └── postgres/
+│       └── postgres_connector.py
+│
+├── mcp/
+│   ├── clients/
+│   │   ├── github_mcp_client.py
+│   │   ├── jira_mcp_client.py
+│   │   ├── confluence_mcp_client.py
+│   │   └── postgres_mcp_client.py
+│   │
+│   ├── servers/
+│   │   ├── github_server.py
+│   │   ├── jira_server.py
+│   │   ├── confluence_server.py
+│   │   └── postgres_server.py
+│   │
+│   └── registry/
+│       └── tool_registry.py
+│
+├── memory/
+│   ├── short_term/
+│   │   ├── memory_manager.py
+│   │   └── checkpointer.py
+│   │
+│   ├── long_term/
+│   │   ├── semantic_memory.py
+│   │   ├── episodic_memory.py
+│   │   └── procedural_memory.py
+│   │
+│   └── vector_store/
+│       ├── embeddings.py
+│       └── pgvector_store.py
+│
+├── repositories/
+│   ├── chat_repository.py
+│   ├── memory_repository.py
+│   └── audit_repository.py
+│
+├── services/
+│   ├── llm_service.py
+│   ├── embedding_service.py
+│   ├── memory_service.py
+│   ├── github_service.py
+│   ├── jira_service.py
+│   └── observability_service.py
+│
+├── database/
+│   ├── connection.py
+│   ├── models/
+│   │   ├── chat_history.py
+│   │   ├── memories.py
+│   │   └── audit_log.py
+│   │
+│   └── migrations/
+│
+├── observability/
+│   ├── tracing/
+│   │   └── opentelemetry.py
+│   │
+│   ├── metrics/
+│   │   └── prometheus_metrics.py
+│   │
+│   ├── logging/
+│   │   └── structured_logger.py
+│   │
+│   └── dashboards/
+│       └── grafana/
+│
+├── security/
+│   ├── auth.py
+│   ├── permissions.py
+│   └── secrets_manager.py
+│
+├── evaluation/
+│   ├── llm_evaluator.py
+│   ├── quality_metrics.py
+│   └── benchmark_runner.py
+│
+├── tests/
+│   ├── unit/
+│   ├── integration/
+│   ├── graph/
+│   ├── connectors/
+│   └── mcp/
+│
+├── scripts/
+│   ├── seed_data.py
+│   └── initialize_memory.py
+│
+├── docker/
+│   ├── Dockerfile
+│   └── docker-compose.yml
+│
+├── deployment/
+│   ├── kubernetes/
+│   ├── helm/
+│   └── terraform/
+│
+└── docs/
+    ├── architecture/
+    ├── diagrams/
+    ├── api/
+    ├── mcp/
+    └── runbooks/

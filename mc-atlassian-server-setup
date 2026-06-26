@@ -1,0 +1,19 @@
+
+Steps
+
+1 ) clone repo https://github.com/sooperset/mcp-atlassian
+
+2) Create atlassian token
+
+3) open cmd and run below commands, this will up mcp jira server
+    $env:JIRA_URL="https://<ur-rul>>.atlassian.net"
+    $env:JIRA_USERNAME="<mail-id>>@gmail.com"
+    $env:JIRA_API_TOKEN="<token>"
+
+
+    uvx mcp-atlassian --transport streamable-http --stateless --port 9000
+
+refer: https://mcp-atlassian.soomiles.com/docs/http-transport#streamable-http
+
+
+
